@@ -1,0 +1,85 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 30 84% 94%;
+    --foreground: 210 40% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 12 97% 52%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 12 97% 52%;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-peach text-charcoal font-inter;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sora font-bold;
+  }
+}
+
+@layer components {
+  .container {
+    @apply px-4 md:px-6 max-w-7xl mx-auto;
+  }
+  
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+
+  .btn-primary {
+    @apply bg-coral text-white px-6 py-3 rounded-md font-semibold transition-colors hover:bg-coral2 inline-block;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-coral border-2 border-coral px-6 py-[10px] rounded-md font-semibold transition-colors hover:bg-cream inline-block;
+  }
+  
+  .card-shadow {
+    @apply shadow-[0_4px_20px_rgba(0,0,0,0.08)];
+  }
+}
