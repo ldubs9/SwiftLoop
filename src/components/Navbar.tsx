@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -35,7 +34,11 @@ const Navbar = () => {
     )}>
       <div className="container flex justify-between items-center">
         <a href="#home" className="text-2xl font-bold text-navy flex items-center gap-2">
-          <div className="w-8 h-8 bg-coral rounded-full flex items-center justify-center text-white font-bold">S</div>
+          <img 
+            src="/images/logo 500x475.png" 
+            alt="SwiftLoop Logo" 
+            className="w-14 h-14 object-contain"
+          />
           <span>SwiftLoop</span>
         </a>
         

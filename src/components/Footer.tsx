@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const Footer = () => {
@@ -10,7 +9,11 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           <div>
             <a href="#home" className="text-2xl font-bold flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-coral rounded-full flex items-center justify-center text-white font-bold">S</div>
+              <img 
+                src="/images/logo 500x475.png" 
+                alt="SwiftLoop Logo" 
+                className="w-12 h-12 object-contain"
+              />
               <span>SwiftLoop</span>
             </a>
             <p className="text-gray-300 mb-4">
