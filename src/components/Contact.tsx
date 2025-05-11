@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Mail, Phone, Send } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
@@ -65,7 +64,6 @@ const countryCodes = [
   { value: "32", label: "🇧🇪 Belgium (+32)", flag: "🇧🇪" },
   { value: "351", label: "🇵🇹 Portugal (+351)", flag: "🇵🇹" },
   { value: "30", label: "🇬🇷 Greece (+30)", flag: "🇬🇷" },
-  { value: "972", label: "🇮🇱 Israel (+972)", flag: "🇮🇱" },
 ];
 
 // Form validation schema
@@ -77,9 +75,9 @@ const formSchema = z.object({
     message: "Please enter a valid email address.",
   }),
   countryCode: z.string().default("971"),
-  phoneNumber: z.string().regex(/^\d{9}$/, {
-    message: "Please enter a valid phone number (9 digits without country code).",
-  }),
+  phoneNumber: z.string().min(5, {
+    message: "Please enter a valid phone number.",
+  }), // Allow phone numbers with at least 5 digits
   subject: z.string().min(3, {
     message: "Subject must be at least 3 characters.",
   }),
@@ -107,20 +105,59 @@ const Contact = () => {
     },
   });
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
+    // Format the full phone number with country code
+    const fullPhoneNumber = `+${data.countryCode}${data.phoneNumber}`;
+    
+    // Format date in a more readable format
+    const now = new Date();
+    const formattedDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+    
+    // Prepare the data to send to n8n
+    const submissionData = {
+      ...data,
+      fullPhoneNumber,
+      formSource: "website-contact-form",
+      submittedAt: formattedDate, // Using formatted date instead of ISO string
+    };
+    
+    try {
+      // Replace with your actual n8n webhook URL
+      const n8nWebhookUrl = "https://pawnjourney.app.n8n.cloud/webhook/50039349-231a-4571-828b-c74e17e45f26";
+      
+      const response = await fetch(n8nWebhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(submissionData),
+      });
+      
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      
+      // Handle successful submission
       toast({
         title: "Message sent!",
         description: "We'll get back to you as soon as possible.",
       });
+      
+      // Reset form after successful submission
       form.reset();
+    } catch (error) {
+      console.error("Form submission error:", error);
+      
+      toast({
+        title: "Submission failed",
+        description: "There was an error sending your message. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
-    
-    console.log("Form data:", data);
+    }
   };
 
   // Find flag for the currently selected country code
@@ -273,14 +310,14 @@ const Contact = () => {
                   <Mail size={20} />
                   <div>
                     <h4 className="font-semibold">Email Us</h4>
-                    <p className="text-gray-200">info@swiftloop.com</p>
+                    <p className="text-gray-200">swiftloop.info@gmail.com</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
                   <Phone size={20} />
                   <div>
                     <h4 className="font-semibold">Call Us</h4>
-                    <p className="text-gray-200">(+971) 50-123-4567</p>
+                    <p className="text-gray-200">(+971) 50-972-5199</p>
                   </div>
                 </div>
               </div>
@@ -306,4 +343,3 @@ const Contact = () => {
 };
 
 export default Contact;
-// Note: The above code is a React component for a contact form with validation and a country code dropdown.
