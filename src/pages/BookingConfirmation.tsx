@@ -9,7 +9,14 @@ const BookingConfirmation = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-cream to-peach py-12 px-4">
       <Card className="w-full max-w-2xl bg-white card-shadow">
-        <CardHeader className="text-center bg-navy text-white py-8 rounded-t-lg">
+        <CardHeader className="text-center bg-navy text-white py-8 rounded-t-lg relative">
+          <div className="absolute top-3 left-3">
+            <img 
+              src="/images/logo 500x475.png"
+              alt="SwiftLoop Logo" 
+              className="h-16 w-auto" 
+            />
+          </div>
           <CheckCircle size={64} className="mx-auto mb-4 text-green-400" />
           <h1 className="text-3xl font-bold">Booking Confirmed!</h1>
           <p className="text-lg mt-2 text-gray-100">Thank you for scheduling a consultation with us.</p>
