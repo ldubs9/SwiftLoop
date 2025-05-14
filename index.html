@@ -3,18 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>swiftloop-launchpad-builder</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
+    <title>SwiftLoop – AI Workflow Automations</title>
+    <meta name="description" content="SwiftLoop: AI Workflow Automations, Chatbots, and Custom Automation Solutions for Businesses." />
+    <meta name="author" content="SwiftLoop" />
 
-    <meta property="og:title" content="swiftloop-launchpad-builder" />
-    <meta property="og:description" content="Lovable Generated Project" />
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.png" type="image/png" />
+
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content="SwiftLoop – AI Workflow Automations" />
+    <meta property="og:description" content="AI-powered workflow automations, chatbots, and custom solutions to streamline your business." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta property="og:image" content="/images/logo 500x475.png" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta name="twitter:site" content="@swiftloop" />
+    <meta name="twitter:image" content="/images/logo 500x475.png" />
   </head>
 
   <body>
@@ -22,5 +26,70 @@
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Animate page title on blur/focus (no jQuery needed)
+      let origTitle = document.title;
+      let animatedTitle = "Hey There! " + origTitle;
+      let timer = null;
+      let currentState = false;
+
+      function animateTitle() {
+        timer = setInterval(() => {
+          document.title = currentState ? origTitle : animatedTitle;
+          currentState = !currentState;
+        }, 2000);
+      }
+
+      function restoreTitle() {
+        clearInterval(timer);
+        document.title = origTitle;
+        currentState = false;
+      }
+
+      window.addEventListener('blur', animateTitle);
+      window.addEventListener('focus', restoreTitle);
+    </script>
+    <script>
+      // Animated scrolling page title (no jQuery, no eval)
+      (function() {
+        let rev = "fwd";
+        let timer = null;
+        const speed = 100;
+        const baseMsg = "SwiftLoop – AI Workflow Automations";
+        let msg = "   " + baseMsg + "   ";
+        let pos = 1; // Start at 1, not 0
+
+        // Set initial title to avoid empty string
+        document.title = msg.substr(0, pos);
+
+        function titlebar() {
+          const le = msg.length;
+          if (rev === "fwd") {
+            if (pos < le) {
+              pos = pos + 1;
+              const scroll = msg.substr(0, pos) || baseMsg;
+              document.title = scroll;
+              timer = setTimeout(titlebar, speed);
+            } else {
+              rev = "bwd";
+              timer = setTimeout(titlebar, speed);
+            }
+          } else {
+            if (pos > 1) { // Don't go to 0
+              pos = pos - 1;
+              const ale = le - pos;
+              const scrol = msg.substr(ale, le) || baseMsg;
+              document.title = scrol;
+              timer = setTimeout(titlebar, speed);
+            } else {
+              rev = "fwd";
+              timer = setTimeout(titlebar, speed);
+            }
+          }
+        }
+
+        titlebar();
+      })();
+    </script>
   </body>
 </html>
